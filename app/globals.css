@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* ─── Prehendo design tokens: detective noir meets bright & playful ─── */
+@theme {
+  --color-ink: #12101c;        /* night background */
+  --color-night: #1c1830;      /* panels */
+  --color-smoke: #2e2748;      /* borders */
+  --color-chalk: #efeaf8;      /* text on dark */
+  --color-fog: #a9a3c4;        /* muted text on dark */
+  --color-paper: #fbf5e6;      /* case paper */
+  --color-paper-dark: #efe4c8;
+  --color-manila: #e9c46a;     /* folder tab */
+  --color-graphite: #2b2836;   /* text on paper */
+  --color-clue: #ffd23f;       /* evidence-tape yellow */
+  --color-real: #2ec4b6;       /* teal */
+  --color-fake: #ff5d73;       /* coral */
+  --color-misleading: #ff9f1c; /* tangerine */
+  --color-violet: #9b5de5;
+
+  --font-display: "Bungee", ui-sans-serif, system-ui, sans-serif;
+  --font-type: "Special Elite", ui-monospace, monospace;
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-news: Georgia, "Times New Roman", serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-ink);
+  /* Spotlight + venetian-blind light, the classic noir office */
+  background-image:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgb(155 93 229 / 0.28), transparent 70%),
+    repeating-linear-gradient(-28deg, rgb(255 255 255 / 0.025) 0 22px, transparent 22px 52px);
+  background-attachment: fixed;
+  color: var(--color-chalk);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-clue);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-clue);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Paper texture for case files */
+.paper {
+  background-color: var(--color-paper);
+  background-image:
+    radial-gradient(rgb(43 40 54 / 0.05) 1px, transparent 1px);
+  background-size: 14px 14px;
+  color: var(--color-graphite);
+}
+
+/* Caution / evidence tape */
+.tape {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-clue) 0 18px,
+    var(--color-ink) 18px 36px
+  );
+}
+
+/* Rubber stamp */
+.stamp {
+  font-family: var(--font-display);
+  border: 5px solid currentColor;
+  border-radius: 10px;
+  padding: 0.25rem 1rem;
+  letter-spacing: 0.08em;
+  mix-blend-mode: multiply;
+  animation: stamp-in 420ms cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+
+@keyframes stamp-in {
+  0% { transform: scale(2.6) rotate(-14deg); opacity: 0; }
+  60% { opacity: 1; }
+  100% { transform: scale(1) rotate(-9deg); opacity: 0.92; }
+}
+
+@keyframes rise {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.rise { animation: rise 380ms ease-out both; }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.wiggle { animation: wiggle 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp, .rise, .wiggle { animation: none; }
+  .stamp { transform: rotate(-9deg); }
+}
